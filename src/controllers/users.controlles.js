@@ -44,10 +44,25 @@ const validateEmail = async (req, res, next) => {
   }
 };
 
+const updateUser = async (req, res, next) =>{
+  
+  try {
+    const {id} = req.params;
+    const {avatar} = req.file
+    const {username} = req.body
+
+    await UserServices.updateUserService({id, avatar, username});
+    res.status(201).send();
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   createUser,
   login,
   validateEmail,
+  updateUser
 };
 
 // alguien esta editando

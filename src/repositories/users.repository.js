@@ -22,8 +22,19 @@ const validateEmail = async (decoded) => {
       return user;
 }
 
+const updateUser = async (userData, id) =>{
+  const user = await Users.update({
+    username: userData.username,
+    avatar: userData.filename
+  },{
+    where: {id}
+  })
+  return user
+}
+
 module.exports = {
     createUser,
     loginUser,
-    validateEmail
+    validateEmail,
+    updateUser
 }

@@ -1,4 +1,4 @@
-const {createUser, loginUser, validateEmail} = require("../repositories/users.repository")
+const {createUser, loginUser, validateEmail, updateUser} = require("../repositories/users.repository")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -99,6 +99,14 @@ class UserServices {
             });
           }
           return decoded
+    }
+    static async updateUserService(userData) {
+      try {
+        const user = await updateUser(userData);
+        return user;
+      } catch (e) {
+        throw e
+      }
     }
 }
 
