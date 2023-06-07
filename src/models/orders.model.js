@@ -6,7 +6,8 @@ const Orders = db.define(
   {
     totalPrice: {
       type: DataTypes.REAL,
-      allowNull: false
+      allowNull: false,
+      field: "total_price"
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -22,3 +23,5 @@ const Orders = db.define(
     timestamps: false
   }
 )
+
+module.exports = Orders;
