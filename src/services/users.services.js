@@ -100,12 +100,12 @@ class UserServices {
           }
           return decoded
     }
-    static async updateUserService(userData) {
+    static async updateUserService(filename, username, id) {
       try {
-        const user = await updateUser(userData);
+        const user = await updateUser(filename, username, id);
         return user;
       } catch (e) {
-        throw e
+         console.log("error en servicio")
       }
     }
 }

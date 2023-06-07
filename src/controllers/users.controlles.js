@@ -44,17 +44,17 @@ const validateEmail = async (req, res, next) => {
   }
 };
 
-const updateUser = async (req, res, next) =>{
+const updateUserController = async (req, res, next) =>{
   
   try {
     const {id} = req.params;
-    const {avatar} = req.file
     const {username} = req.body
-
-    await UserServices.updateUserService({id, avatar, username});
-    res.status(201).send();
+    const {filename} = req.file
+    console.log("entro controlador")
+    await UserServices.updateUserService(filename, username, id);
+    res.status(201).json({ message: '¡Imagen cargada exitosamente!' });
   } catch (error) {
-    next(error)
+    console.log("error")
   }
 }
 
@@ -62,7 +62,7 @@ module.exports = {
   createUser,
   login,
   validateEmail,
-  updateUser
+  updateUserController
 };
 
 // alguien esta editando
