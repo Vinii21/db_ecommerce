@@ -2,17 +2,18 @@ const { DataTypes } = require("sequelize");
 const db = require("../utils/database");
 
 
-const Car = db.define(
-  "car",
+const Cars = db.define(
+  "cars",
   {
-    UserId: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       field: "user_id"
     },
     totalPrice: {
       type: DataTypes.REAL,
-      allowNull: false
+      allowNull: false,
+      field: "total_price"
     }
   },
   {
@@ -20,4 +21,4 @@ const Car = db.define(
   }
 )
 
-module.exports = Car
+module.exports = Cars
