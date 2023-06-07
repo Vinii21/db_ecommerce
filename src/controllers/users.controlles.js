@@ -44,10 +44,25 @@ const validateEmail = async (req, res, next) => {
   }
 };
 
+const updateUserController = async (req, res, next) =>{
+  
+  try {
+    const {id} = req.params;
+    const {username} = req.body
+    const {filename} = req.file
+    console.log("entro controlador")
+    await UserServices.updateUserService(filename, username, id);
+    res.status(201).json({ message: '¡Imagen cargada exitosamente!' });
+  } catch (error) {
+    console.log("error")
+  }
+}
+
 module.exports = {
   createUser,
   login,
   validateEmail,
+  updateUserController
 };
 
 // alguien esta editando
