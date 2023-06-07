@@ -6,11 +6,13 @@ const ProductInOrder = db.define(
   {
     orderId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: "order_id"
     },
     productId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: "product_id"
     },
     quantity: {
       type: DataTypes.INTEGER,
@@ -21,10 +23,12 @@ const ProductInOrder = db.define(
       allowNull: false
     },
     status:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.BOOLEAN,
       defaultValue:false
     }
   }, {
   timestamps: false
 }
 )
+
+module.exports = ProductInOrder

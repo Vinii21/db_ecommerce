@@ -27,11 +27,13 @@ const Products = db.define(
     },
     productImage: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      field: "product_image"
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: "user_id"
     }
   },
   {
