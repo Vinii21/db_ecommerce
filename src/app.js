@@ -13,9 +13,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-db.sync()
-  .then(()=>console.log("Sincronizado"))
-  .catch(e=>console.error(e))
+db.sync({ alter: true })
+  .then(() => console.log("Sincronizado"))
+  .catch(e => console.error(e))
 
 const PORT = process.env.PORT || 8000;
 
