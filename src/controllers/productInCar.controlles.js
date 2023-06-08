@@ -14,7 +14,6 @@ const addProductsToCar = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { carId, productId, quantity, price } = req.body;
-
     await ProductInCarServices.addNewProducts({
       id,
       carId,
