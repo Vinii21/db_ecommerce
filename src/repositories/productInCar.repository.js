@@ -1,32 +1,32 @@
 const { Op } = require("sequelize");
 const ProductInCar = require("../models/productInCar.model");
+const Products = require("../models/products.model");
 
 const createProductInCar = async (dataProductInCar) => {
   const productInCar = await ProductInCar.create(dataProductInCar);
   return productInCar;
 }
 
-const updateTotal = async (price, id) => {
-  const order = await ProductInCar.increment({ price: price }, {
-    where: { id }
+const updateTotal = async (price, productId) => {
+  const productInCar = await ProductInCar.increment({ price: price }, {
+    where: { productId }
   })
-  return order;
+  return productInCar;
 }
 
-const getOneProduct = async (id) => {
-  console.log(id)
+const getOneProduct = async (productId) => {
   const product = await ProductInCar.findOne({
-    where: { id }
+    where: { productId }
   });
   console.log(product)
   return product;
 }
 
-const updateQantity = async (id) => {
+const updateQantity = async (productId) => {
   console.log("entro a updateQuantity");
   const product = await ProductInCar.increment({
     quantity: 1
-  }, { where: { id } })
+  }, { where: { productId } })
   return product;
 }
 
