@@ -16,6 +16,14 @@ const getOrderByUser = async (userId) => {
   return orderUser;
 }
 
+const createOrder = async (orderData) => {
+  const order = await Orders.create(orderData);
+  return order;
+}
+
+
+
 module.exports = {
-  getOrderByUser
+  getOrderByUser,
+  createOrder
 }

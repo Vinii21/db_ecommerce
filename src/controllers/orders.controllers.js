@@ -11,6 +11,17 @@ const getOrdersByUserController = async (req, res, next) => {
   }
 };
 
+const createOrderController = async (req, res, next) => {
+  try {
+    const orderData = req.body;
+    await OrderServices.createOrderService(orderData);
+    res.status(201).send();
+  } catch (error) {
+    next(error)
+  }
+};
+
 module.exports = {
-  getOrdersByUserController
+  getOrdersByUserController,
+  createOrderController
 }
