@@ -13,9 +13,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.set("view engine", "ejs")
-app.use(express.static("assets"))
-
 db.sync({ alter: true })
   .then(() => console.log("Sincronizado"))
   .catch(e => console.error(e))
@@ -33,9 +30,3 @@ errorRoutes(app);
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
-
-// Organizar los archivos para empezar con nuestros eps
-
-// TODO les voy a dar las especificacones al estilo de una prueba tecnica
-
-// instalar dbeaver??

@@ -1,5 +1,5 @@
 const UserServices = require("../services/users.services")
-const { sendWelcomeMail, sendPurchaseOrderMail } = require("../utils/sendMails");
+const { sendWelcomeMail } = require("../utils/sendMails");
 require("dotenv").config();
 const CarsServices = require("../services/cars.services")
 
@@ -11,7 +11,7 @@ const createUser = async (req, res, next) => {
     res.status(201).send()
     await CarsServices.createNewCar({userId: user.dataValues.id});
     const vt = await UserServices.verifyToken(username, email)
-    sendPurchaseOrderMail(email, { username, vt });
+    sendWelcomeMail(email, { username, vt });
   } catch (e) {
     next(e)
   }
