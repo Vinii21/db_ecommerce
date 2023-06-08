@@ -37,8 +37,19 @@ const getProductInCarController = async (req, res, next) => {
   }
 };
 
+const purchesProductInCarController = async (req, res, next) => {
+  try {
+    const dataProduct = req.body;
+    const productCar = await ProductInCarServices.clearProductInCarServices(dataProduct)
+    res.json(productCar);
+  } catch (error) {
+    next(error)
+  }
+};
+
 module.exports = {
   createProductInCarController,
   addProductsToCar,
-  getProductInCarController
+  getProductInCarController,
+  purchesProductInCarController
 }
