@@ -5,4 +5,13 @@ const createProducts = async (newProduct) => {
   return produc;
 }
 
-module.exports = { createProducts }
+const updateDescription = async (description, id) => {
+  const product = await Products.update({
+    description: description
+  }, {
+    where: { id }
+  })
+  return product;
+}
+
+module.exports = { createProducts, updateDescription }
