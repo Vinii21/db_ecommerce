@@ -23,7 +23,6 @@ const validateEmail = async (decoded) => {
 }
 
 const updateUser = async (filename, username, id) =>{
-  
     const user = await Users.update({
         username:username,
         avatar: filename

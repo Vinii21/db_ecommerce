@@ -12,7 +12,7 @@ const Cars = db.define(
     },
     totalPrice: {
       type: DataTypes.REAL,
-      allowNull: false,
+      defaultValue: 0.0,
       field: "total_price"
     }
   },
