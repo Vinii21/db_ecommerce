@@ -1,4 +1,4 @@
-const {createUser, loginUser, validateEmail, updateUser} = require("../repositories/users.repository")
+const {createUser, loginUser, validateEmail, updateUser, getUserbyIdAndProductsInCar} = require("../repositories/users.repository")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -105,7 +105,16 @@ class UserServices {
         const user = await updateUser(filename, username, id);
         return user;
       } catch (e) {
-         console.log("error en servicio")
+         throw e
+      }
+    }
+
+    static async getProductsInCar(id) {
+      try {
+        const user = await getUserbyIdAndProductsInCar(id);
+        return user;
+      } catch (e) {
+        throw e
       }
     }
 }

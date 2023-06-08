@@ -5,6 +5,7 @@ const {
   login,
   validateEmail,
   updateUserController,
+  getUserbyIdController
 } = require("../controllers/users.controlles");
 const {
   createUserValidator,
@@ -21,6 +22,8 @@ router.post("/users/login", loginUserValidator, login);
 
 router.post("/users/email-validate", validateEmail);
 
-router.put("/users/:id", upload, updateUserController )
+router.put("/users/:id", upload, updateUserController );
+
+router.get("/users/:id", getUserbyIdController);
 
 module.exports = router;

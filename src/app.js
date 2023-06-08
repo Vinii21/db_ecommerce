@@ -13,6 +13,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.set("view engine", "ejs")
+app.use(express.static("assets"))
+
 db.sync({ alter: true })
   .then(() => console.log("Sincronizado"))
   .catch(e => console.error(e))

@@ -1,5 +1,5 @@
 const UserServices = require("../services/users.services")
-const { sendWelcomeMail } = require("../utils/sendMails");
+const { sendWelcomeMail, sendPurchaseOrderMail } = require("../utils/sendMails");
 require("dotenv").config();
 const CarsServices = require("../services/cars.services")
 
@@ -11,8 +11,7 @@ const createUser = async (req, res, next) => {
     res.status(201).send()
     await CarsServices.createNewCar({userId: user.dataValues.id});
     const vt = await UserServices.verifyToken(username, email)
-    console.log(vt)
-    sendWelcomeMail(email, { username, vt });
+    sendPurchaseOrderMail(email, { username, vt });
   } catch (e) {
     next(e)
   }
@@ -47,7 +46,6 @@ const validateEmail = async (req, res, next) => {
 };
 
 const updateUserController = async (req, res, next) =>{
-  
   try {
     const {id} = req.params;
     const {username} = req.body
@@ -56,7 +54,17 @@ const updateUserController = async (req, res, next) =>{
     await UserServices.updateUserService(filename, username, id);
     res.status(201).json({ message: '¡Imagen cargada exitosamente!' });
   } catch (error) {
-    console.log("error")
+    next(error)
+  }
+}
+
+const getUserbyIdController = async (req, res, next) =>{
+  try{
+    const {id} = req.params;
+    const user = await UserServices.getProductsInCar(id);
+    res.status(200).json(user)
+  } catch (e) {
+    next(e)
   }
 }
 
@@ -64,7 +72,8 @@ module.exports = {
   createUser,
   login,
   validateEmail,
-  updateUserController
+  updateUserController,
+  getUserbyIdController
 };
 
 // alguien esta editando
