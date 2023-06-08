@@ -1,13 +1,15 @@
 const UserServices = require("../services/users.services")
 const { sendWelcomeMail } = require("../utils/sendMails");
 require("dotenv").config();
+const CarsServices = require("../services/cars.services")
 
 const createUser = async (req, res, next) => {
   try {
     const {username, email, password} = req.body;
     const hash = await UserServices.hashed(password)
-    await UserServices.createNewUser({username, email, password:hash});
+    const user = await UserServices.createNewUser({username, email, password:hash});
     res.status(201).send()
+    await CarsServices.createNewCar({userId: user.dataValues.id});
     const vt = await UserServices.verifyToken(username, email)
     console.log(vt)
     sendWelcomeMail(email, { username, vt });
