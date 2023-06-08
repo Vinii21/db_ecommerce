@@ -1,22 +1,11 @@
 const ProductInCarServices = require("../services/productInCar.services");
 
-const createProductInCarController = async (req, res, next) => {
-  try {
-    const dataProductInCar = req.body;
-    await ProductInCarServices.createProductInCarService(dataProductInCar);
-    res.status(201).send()
-  } catch (error) {
-    next(error)
-  }
-};
 
 const addProductsToCar = async (req, res, next) => {
   try {
-    const { id } = req.params;
     const { carId, productId, quantity, price } = req.body;
 
     await ProductInCarServices.addNewProducts({
-      id,
       carId,
       productId,
       price,
@@ -37,8 +26,18 @@ const getProductInCarController = async (req, res, next) => {
   }
 };
 
+const purchesProductInCarController = async (req, res, next) => {
+  try {
+    const dataProduct = req.body;
+    const productCar = await ProductInCarServices.clearProductInCarServices(dataProduct)
+    res.json(productCar);
+  } catch (error) {
+    next(error)
+  }
+};
+
 module.exports = {
-  createProductInCarController,
   addProductsToCar,
-  getProductInCarController
+  getProductInCarController,
+  purchesProductInCarController
 }

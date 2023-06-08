@@ -10,6 +10,8 @@ class ProductService {
     }
   }
 
+  
+
   static async updateProductDescriptioService(description, id) {
     try {
       const product = await updateDescription(description, id);
