@@ -5,7 +5,15 @@ const createCar = async (newCar) => {
     return car;
 }
 
+const updateTotalPriceCar = async (price, id) => {
+    const car = await Cars.increment({totalPrice: price}, {
+        where: {id}
+    })
+    return car;
+}
+
 module.exports = {
-    createCar
+    createCar,
+    updateTotalPriceCar
 }
 

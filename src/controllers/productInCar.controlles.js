@@ -4,7 +4,6 @@ const ProductInCarServices = require("../services/productInCar.services");
 const addProductsToCar = async (req, res, next) => {
   try {
     const { carId, productId, quantity, price } = req.body;
-
     await ProductInCarServices.addNewProducts({
       carId,
       productId,
