@@ -1,6 +1,7 @@
 const Users = require("../models/users.model");
 const Cars = require("../models/cars.model");
 const ProductsInCar = require("../models/productInCar.model")
+const Products = require("../models/products.model")
 
 const createUser = async (newUser) => {
     const user = await Users.create(newUser);
@@ -43,7 +44,14 @@ const getUserbyIdAndProductsInCar = async (id) => {
                 attributes: ["id", "totalPrice"],
                 include: [
                     {
-                        model: ProductsInCar
+                        model: ProductsInCar,
+                        attributes: ["quantity","price","status"],
+                        include: [
+                            {
+                                model: Products,
+                                attributes: {exclude:["available","userId"]}
+                            }
+                        ]
                     }
                 ]
             }
