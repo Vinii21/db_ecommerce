@@ -22,7 +22,7 @@ const createOrder = async (orderData) => {
 }
 
 const updateStatusOrder = async (id) => {
-  const order = await Orders.update({status: false},{
+  const order = await Orders.update({status: true},{
     where: {id}
   });
   return order;
