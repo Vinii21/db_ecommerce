@@ -6,6 +6,12 @@ const createCar = async (newCar) => {
 }
 
 const updateTotalPriceCar = async (price, id) => {
+    if(price === 0) {
+        const car = await Cars.update({totalPrice: price},{
+            where: {id}
+        })
+        return car;
+    }
     const car = await Cars.increment({totalPrice: price}, {
         where: {id}
     })

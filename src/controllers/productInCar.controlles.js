@@ -1,4 +1,5 @@
 const ProductInCarServices = require("../services/productInCar.services");
+const CarsServices = require("../services/cars.services")
 
 
 const addProductsToCar = async (req, res, next) => {
@@ -10,20 +11,21 @@ const addProductsToCar = async (req, res, next) => {
       price,
       quantity,
     })
-    res.status(201).send();
+    res.status(201).send()
+    await CarsServices.updateTotalPrice(price, carId);
   } catch (error) {
     next(error)
   }
 };
 
-const getProductInCarController = async (req, res, next) => {
+/* const getProductInCarController = async (req, res, next) => {
   try {
     const productInCar = await ProductInCarServices.getProductInCarServices();
     res.json(productInCar);
   } catch (error) {
     next(error)
   }
-};
+}; */
 
 const purchesProductInCarController = async (req, res, next) => {
   try {
@@ -37,6 +39,6 @@ const purchesProductInCarController = async (req, res, next) => {
 
 module.exports = {
   addProductsToCar,
-  getProductInCarController,
+  /* getProductInCarController, */
   purchesProductInCarController
 }

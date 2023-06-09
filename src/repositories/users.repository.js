@@ -45,6 +45,7 @@ const getUserbyIdAndProductsInCar = async (id) => {
                 include: [
                     {
                         model: ProductsInCar,
+                        where: {status: false},
                         attributes: ["quantity","price","status"],
                         include: [
                             {

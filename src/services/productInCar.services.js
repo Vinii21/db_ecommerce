@@ -1,6 +1,4 @@
 const { createProductInCar, getOneProduct, updateTotal, updateQantity, getProductInCar, pourchaseProduct, clearProductInCar } = require("../repositories/productInCar.repository");
-const { createNewProduct } = require("./products.services");
-
 class ProductInCarServices {
   static async createProductInCarService(dataProductInCar) {
     return await createProductInCar(dataProductInCar);
@@ -11,11 +9,9 @@ class ProductInCarServices {
       // ? Existe el producto para esta orden
       const product = await getOneProduct(data.productId);
       await updateTotal(data.price, data.productId);
-      console.log("actualizando")
-      if (!product) {
+      if (!product || product.dataValues.status) {
         return await createProductInCar(data);
       }
-
       return await updateQantity(data.productId);
     } catch (error) {
       throw error;
@@ -28,9 +24,8 @@ class ProductInCarServices {
 
   static async clearProductInCarServices(dataProduct) {
     try {
-      const updateStatu = await pourchaseProduct(dataProduct);
+      await pourchaseProduct(dataProduct);
       const listCar = await clearProductInCar(dataProduct.carId);
-
       return listCar;
     } catch (error) {
       throw error;
