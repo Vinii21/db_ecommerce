@@ -1,4 +1,5 @@
 const ProductInCarServices = require("../services/productInCar.services");
+const CarsServices = require("../services/cars.services")
 
 
 const addProductsToCar = async (req, res, next) => {
@@ -10,7 +11,8 @@ const addProductsToCar = async (req, res, next) => {
       price,
       quantity,
     })
-    res.status(201).send();
+    res.status(201).send()
+    await CarsServices.updateTotalPrice(price, carId);
   } catch (error) {
     next(error)
   }

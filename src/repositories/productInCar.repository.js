@@ -1,6 +1,5 @@
 const { Op } = require("sequelize");
 const ProductInCar = require("../models/productInCar.model");
-const Products = require("../models/products.model");
 
 const createProductInCar = async (dataProductInCar) => {
   const productInCar = await ProductInCar.create(dataProductInCar);
@@ -18,12 +17,10 @@ const getOneProduct = async (productId) => {
   const product = await ProductInCar.findOne({
     where: { productId }
   });
-  console.log(product)
   return product;
 }
 
 const updateQantity = async (productId) => {
-  console.log("entro a updateQuantity");
   const product = await ProductInCar.increment({
     quantity: 1
   }, { where: { productId } })
