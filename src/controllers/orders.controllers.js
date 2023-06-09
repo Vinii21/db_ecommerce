@@ -1,5 +1,6 @@
 const OrderServices = require("../services/orders.services");
-
+const ProductInCarServices = require("../services/productInCar.services")
+const CarsServices = require("../services/cars.services")
 
 const getOrdersByUserController = async (req, res, next) => {
   try {
@@ -21,7 +22,21 @@ const createOrderController = async (req, res, next) => {
   }
 };
 
+const completedOrder = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const {carId} = req.body;
+    await OrderServices.updateStatusService(id);
+    res.status(201).send();
+    await ProductInCarServices.clearProductInCarServices({carId});
+    await CarsServices.updateTotalPrice(0, carId)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getOrdersByUserController,
-  createOrderController
+  createOrderController,
+  completedOrder
 }

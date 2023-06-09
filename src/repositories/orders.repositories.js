@@ -21,9 +21,17 @@ const createOrder = async (orderData) => {
   return order;
 }
 
+const updateStatusOrder = async (id) => {
+  const order = await Orders.update({status: false},{
+    where: {id}
+  });
+  return order;
+}
+
 
 
 module.exports = {
   getOrderByUser,
-  createOrder
+  createOrder,
+  updateStatusOrder
 }

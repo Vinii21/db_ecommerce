@@ -33,7 +33,7 @@ const getProductInCar = async () => {
 }
 const pourchaseProduct = async (dataProduct) => {
   const order = await ProductInCar.update({
-    status: dataProduct.status
+    status: true
   }, {
     where: { carId: dataProduct.carId }
   })
