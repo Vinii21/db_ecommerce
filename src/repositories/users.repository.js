@@ -16,16 +16,6 @@ const loginUser = async (email) => {
     return user;
 }
 
-const validateEmail = async (decoded) => {
-    const user = await Users.update(
-        { validUser: true },
-        {
-          where: { email: decoded.email },
-        }
-      );
-      return user;
-}
-
 const updateUser = async (filename, username, id) =>{
     const user = await Users.update({
         username:username,
@@ -77,7 +67,6 @@ const getOrdersByUserId = async (id) => {
 module.exports = {
     createUser,
     loginUser,
-    validateEmail,
     updateUser,
     getUserbyIdAndProductsInCar,
     getOrdersByUserId

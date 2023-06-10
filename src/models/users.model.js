@@ -34,12 +34,7 @@ const Users = db.define(
     },
     avatar:{
       type: DataTypes.TEXT
-    },
-    validUser: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      field: "valid_user",
-    },
+    }
   },
   {
     timestamps: false,

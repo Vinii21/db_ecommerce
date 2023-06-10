@@ -1,5 +1,4 @@
 const UserServices = require("../services/users.services")
-const { sendChackMail } = require("../utils/sendMails");
 require("dotenv").config();
 const CarsServices = require("../services/cars.services")
 
@@ -10,8 +9,6 @@ const createUser = async (req, res, next) => {
     const user = await UserServices.createNewUser({username, email, password:hash});
     res.status(201).send()
     await CarsServices.createNewCar({userId: user.dataValues.id});
-    const vt = await UserServices.verifyToken(username, email)
-    sendChackMail(email, { username, vt });
   } catch (e) {
     next(e)
   }
@@ -22,24 +19,12 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await UserServices.login(email)
     await UserServices.verifyUser(user, next);
-    await UserServices.verifyEmail(user, next);
     await UserServices.validPassword(password, user, next)
     const { firstname, lastname, id, username, rolId } = user;
     const userData = { firstname, lastname, id, username, email, rolId };
     const token = await UserServices.token(userData)
     userData.token = token;
     res.json(userData);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const validateEmail = async (req, res, next) => {
-  try {
-    const { token } = req.body;
-    const decoded = await UserServices.decoded(token, next)
-    await UserServices.validEmail(decoded)
-    res.status(204).send();
   } catch (error) {
     next(error);
   }
@@ -81,10 +66,7 @@ const getOrdersByUserId = async (req, res, next) => {
 module.exports = {
   createUser,
   login,
-  validateEmail,
   updateUserController,
   getUserbyIdController,
   getOrdersByUserId
 };
-
-// alguien esta editando
