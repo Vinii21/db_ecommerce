@@ -574,7 +574,7 @@
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 680px;"
                                         width="680">
                                         <tbody>
-                                            <% for(let i = 0; i < 5; i++) { %>
+                                            <% for(let i = 0; i < detailsProduct.length; i++) { %>
                                             <tr>
                                                 <td class="column column-1"
                                                     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
@@ -591,7 +591,7 @@
                                                                         style="font-size: 12px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #393d47; line-height: 1.2;">
                                                                         <p
                                                                             style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;">
-                                                                            <% description %></p>
+                                                                            <%= detailsProduct[i].dataValues.product.dataValues.name %></p>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -613,7 +613,7 @@
                                                                         style="font-size: 12px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #393d47; line-height: 1.2;">
                                                                         <p
                                                                             style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">
-                                                                            <% quantity %></p>
+                                                                            <%= detailsProduct[i].dataValues.quantity %></p>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -635,7 +635,7 @@
                                                                         style="font-size: 12px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #393d47; line-height: 1.2;">
                                                                         <p
                                                                             style="margin: 0; font-size: 14px; text-align: right; mso-line-height-alt: 16.8px;">
-                                                                            $ <% price %></p>
+                                                                            $ <%= detailsProduct[i].dataValues.product.dataValues.price * detailsProduct[i].dataValues.quantity %></p>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -890,9 +890,22 @@
                                                                         style="font-size: 12px; font-family: Nunito, Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #68a0a9; line-height: 1.2;">
                                                                         <p
                                                                             style="margin: 0; font-size: 14px; text-align: right; mso-line-height-alt: 16.8px;">
-                                                                            <span style="font-size:22px;"><strong><span
-                                                                                        style="">Total $
-                                                                                        250,00</span></strong></span>
+                                                                            <span style="font-size:22px;"><strong>
+                                                                                
+                                                                                <%
+                                                                                    var total = 0;
+                                                                                    for (let i = 0; i < detailsProduct.length; i++) {
+                                                                                    total += detailsProduct[i].dataValues.product.dataValues.price * detailsProduct[i].dataValues.quantity;
+                                                                                        }
+                                                                                    
+                                                                                    %>
+                                                                                <span
+                                                                                        style="">Total $<%= total %>
+                                                                        
+                                                                                            
+                                                                                            
+                                                        
+                                                                                        </span></strong></span>
                                                                         </p>
                                                                     </div>
                                                                 </div>

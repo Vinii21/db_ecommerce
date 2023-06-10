@@ -46,7 +46,6 @@ const clearProductInCar = async (carId) => {
       [Op.and]: [{ carId: carId }, { status: false }],
     }
   })
-  console.log(productInCar)
   return productInCar;
 }
 

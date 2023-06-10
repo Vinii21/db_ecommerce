@@ -5,17 +5,6 @@ const {sendPurchaseOrderMail} = require('../utils/sendMails');
 const ProductInOrderServices = require("../services/productInOrder.services");
 
 
-
-const getOrdersByUserController = async (req, res, next) => {
-  try {
-    const { userId } = req.params;
-    const orderByUser = await OrderServices.getOrderByUserService(userId);
-    res.json(orderByUser);
-  } catch (error) {
-    next(error)
-  }
-};
-
 const createOrderController = async (req, res, next) => {
   try {
     const {userId,totalPrice } = req.body;
@@ -31,21 +20,19 @@ const createOrderController = async (req, res, next) => {
 const completedOrder = async (req, res, next) => {
   try {
     const {id} = req.params;
-    const {carId} = req.body;
+    const {carId, email} = req.body;
     await OrderServices.updateStatusService(id);
     res.status(201).send();
     await ProductInCarServices.clearProductInCarServices({carId});
     await CarsServices.updateTotalPrice(0, carId);
-    const detailsProduct =await ProductInOrderServices.getProductDetailsServices(id);
-    console.log(detailsProduct.dataValues);
-   // sendPurchaseOrderMail(email);
+    const detailsProduct = await ProductInOrderServices.getProductDetailsServices(id);
+   sendPurchaseOrderMail(email, {detailsProduct});
   } catch (error) {
     next(error)
   }
 }
 
 module.exports = {
-  getOrdersByUserController,
   createOrderController,
   completedOrder
 }
