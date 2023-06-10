@@ -16,7 +16,8 @@ const ProductInOrder = db.define(
     },
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 1
     },
     price: {
       type: DataTypes.REAL,
