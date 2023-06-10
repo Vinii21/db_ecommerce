@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-db.sync({ alter: true })
+db.sync()
   .then(() => console.log("Sincronizado"))
   .catch(e => console.error(e))
 
