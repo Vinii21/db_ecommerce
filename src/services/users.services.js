@@ -18,18 +18,6 @@ class UserServices {
         return hashed;
     }
 
-    static async verifyToken(username, email) {
-        const verifyToken = jwt.sign(
-            { username, email },
-            process.env.JWT_SECRET_EMAIL_VALIDATION,
-            {
-              algorithm: "HS512",
-              expiresIn: "12h",
-            }
-          );
-          return verifyToken;
-    }
-
     static async login(email) {
         try{
             const user = await loginUser(email);
@@ -49,16 +37,6 @@ class UserServices {
           }
     }
 
-    static async verifyEmail(user, next) {
-        if (!user.validUser) {
-            return next({
-              status: 400,
-              name: "email is not verified",
-              message: "User needs verified his/her email",
-            });
-          }
-    }
-
     static async validPassword(password, user, next) {
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
@@ -73,7 +51,7 @@ class UserServices {
     static async token(userData) {
         const token = jwt.sign(userData, process.env.JWT_SECRET_LOGIN, {
             algorithm: "HS512",
-            expiresIn: "5m",
+            expiresIn: "5h",
           });
           return token
     }
