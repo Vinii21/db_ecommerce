@@ -1,13 +1,11 @@
 const { Router } = require('express');
-const {  addProductsToCar/* , getProductInCarController */, purchesProductInCarController } = require('../controllers/productInCar.controlles');
-
+const {  addProductsToCar } = require('../controllers/productInCar.controlles');
+const authenticate = require("../middlewares/auth.middleware");
 
 const router = Router();
 
 
-router.post("/productInCar/products", addProductsToCar);
-/* router.get("/productInCar/", getProductInCarController); */
-router.get("/productInCar/clear", purchesProductInCarController);
+router.post("/productInCar/products", authenticate, addProductsToCar);
 
 module.exports = router;
 
