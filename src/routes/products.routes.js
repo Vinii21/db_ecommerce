@@ -3,8 +3,13 @@ const { createProductController, updateDescriptionController, getProductUserMayo
 const upload = require("../middlewares/multer.middleware");
 const { createProductValidator, updateDescriptionValidator } = require("../validators/products.validators");
 
+const authenticate = require("../middlewares/auth.middleware");
+const { createProductValidator } = require("../validators/products.validators");
+
 const router = Router();
 
+router.post("/products", authenticate, createProductValidator, upload, createProductController);
+router.put("/products", authenticate, updateDescriptionController);
 router.post("/products", upload, createProductController);
 router.put("/products", updateDescriptionValidator, updateDescriptionController);
 router.get("/products", getProductUserMayorController);

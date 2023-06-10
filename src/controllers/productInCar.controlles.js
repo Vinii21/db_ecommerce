@@ -18,27 +18,6 @@ const addProductsToCar = async (req, res, next) => {
   }
 };
 
-/* const getProductInCarController = async (req, res, next) => {
-  try {
-    const productInCar = await ProductInCarServices.getProductInCarServices();
-    res.json(productInCar);
-  } catch (error) {
-    next(error)
-  }
-}; */
-
-const purchesProductInCarController = async (req, res, next) => {
-  try {
-    const dataProduct = req.body;
-    const productCar = await ProductInCarServices.clearProductInCarServices(dataProduct)
-    res.json(productCar);
-  } catch (error) {
-    next(error)
-  }
-};
-
 module.exports = {
   addProductsToCar,
-  /* getProductInCarController, */
-  purchesProductInCarController
 }

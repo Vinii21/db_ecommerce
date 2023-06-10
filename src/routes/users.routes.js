@@ -13,6 +13,7 @@ const {
   loginUserValidator,
 } = require("../validators/user.validators");
 const upload = require("../middlewares/multer.middleware");
+const authenticate = require("../middlewares/auth.middleware");
 
 
 const router = Router();
@@ -23,10 +24,10 @@ router.post("/users/login", loginUserValidator, login);
 
 router.post("/users/email-validate", validateEmail);
 
-router.put("/users/:id", upload, updateUserController );
+router.put("/users/:id", authenticate, upload, updateUserController );
 
-router.get("/users/:id", getUserbyIdController);
+router.get("/users/:id", authenticate, getUserbyIdController);
 
-router.get("/user/orders/:id", getOrdersByUserId)
+router.get("/user/orders/:id", authenticate, getOrdersByUserId);
 
 module.exports = router;

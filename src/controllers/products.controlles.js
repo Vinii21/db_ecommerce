@@ -14,7 +14,8 @@ const createProductController = async (req, res, next) => {
 
 const updateDescriptionController = async (req, res, next) => {
   try {
-    const { description, id } = req.body;
+    const {id} = req.params;
+    const { description } = req.body;
     await ProductService.updateProductDescriptioService(description, id);
     res.status(201).send();
   } catch (error) {
