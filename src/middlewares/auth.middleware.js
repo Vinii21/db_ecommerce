@@ -1,5 +1,6 @@
 // * jwt
 const jwt = require("jsonwebtoken");
+require("dotenv").config()
 
 const authenticate = (req, res, next) => {
   try {
@@ -16,7 +17,7 @@ const authenticate = (req, res, next) => {
       });
     }
 
-    const decoded = jwt.verify(token, "parangaricutirimucuaro", {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_LOGIN, {
       algorithms: "HS512",
     });
 
