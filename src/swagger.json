@@ -1,7 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "DB_ECOMMERCE",
+    "title": "API_ECOMMERCE",
+    "description":"Una API para manejar todo lo relacionado a un e-commerce con sus funcionalidades basicas como crear usuarios, login, crear productos entre otras funcionalidades",
     "contact": {},
     "version": "1.0"
   },
@@ -17,11 +18,11 @@
         "tags": [
           "USER"
         ],
-        "summary": "create new user",
+        "summary": "crea un nuevo usuario",
         "operationId": "createnewuser",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Endpoint para crear un nuevo usuario con sus datos basicos al crear el usuario se crea el carrito",
           "content": {
             "application/json": {
               "schema": {
@@ -58,10 +59,15 @@
     },
     "/users/1": {
       "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "USER"
         ],
-        "summary": "Get products in car by user id",
+        "summary": "obtiene los porudctos de un usuario por su id",
         "operationId": "Getproductsincarbyuserid",
         "parameters": [
           {
@@ -76,6 +82,9 @@
             }
           }
         ],
+        "requestBody":{
+          "description":"Endpoint para obtener los productos de un usuario utilizando el id de ese usuario trae una lista de todos sus productos"
+        },
         "responses": {
           "200": {
             "description": "",
@@ -87,10 +96,15 @@
     },
     "/user/orders/1": {
       "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "USER"
         ],
-        "summary": "Get orders by users id",
+        "summary": "Obtiene las ordenes de un usuario por su Id",
         "operationId": "Getordersbyusersid",
         "parameters": [
           {
@@ -119,11 +133,11 @@
         "tags": [
           "USER"
         ],
-        "summary": "Login",
+        "summary": "Login de usuario genera el token nesesario de autorización",
         "operationId": "Login",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Genera un token para la autorización del usuario y que ese usuario tenga acceso a los endpoint protegidos ",
           "content": {
             "application/json": {
               "schema": {
@@ -158,16 +172,21 @@
     },
     "/products": {
       "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Products"
         ],
-        "summary": "Create Product",
+        "summary": "Crea un producto nuevo",
         "operationId": "CreateProduct",
         "parameters": [
           {
             "name": "access-token",
             "in": "header",
-            "description": "",
+            "description": "Este endpoint se utiliza para la creación de productos el cual guarda el nombre, imagen, descripción del producto entre otros datos",
             "required": true,
             "style": "simple",
             "schema": {
@@ -227,10 +246,15 @@
         "deprecated": false
       },
       "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Products"
         ],
-        "summary": "Get products mayores a cero",
+        "summary": "Obtiene los producto donde su cantidad sea mayor que 0",
         "operationId": "Getproductsmayoresacero",
         "parameters": [
           {
@@ -256,16 +280,21 @@
     },
     "/products/1": {
       "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Products"
         ],
-        "summary": "Edit description product",
+        "summary": "Edita la descripción de un producto",
         "operationId": "Editdescriptionproduct",
         "parameters": [
           {
             "name": "access-token",
             "in": "header",
-            "description": "",
+            "description": "edita la descripción de un producto utilizando el id del producto que se quiere editar",
             "required": true,
             "style": "simple",
             "schema": {
@@ -284,16 +313,21 @@
     },
     "/productincar/products": {
       "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "ProductInCar"
         ],
-        "summary": "add to card",
+        "summary": "Agregar al carrito",
         "operationId": "addtocard",
         "parameters": [
           {
             "name": "access-token",
             "in": "header",
-            "description": "",
+            "description": "Este endpoint agrega al carrito del usuario los productos que el usuario seleccione",
             "required": true,
             "style": "simple",
             "schema": {
@@ -340,16 +374,21 @@
     },
     "/orders": {
       "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Orders"
         ],
-        "summary": "Create Order",
+        "summary": "Crea una Orden",
         "operationId": "CreateOrder",
         "parameters": [
           {
             "name": "access-token",
             "in": "header",
-            "description": "",
+            "description": "Este endpoint nos ayuda a la creación de la orden del usuario",
             "required": true,
             "style": "simple",
             "schema": {
@@ -394,14 +433,19 @@
     },
     "/orders/3": {
       "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Orders"
         ],
-        "summary": "Completed Order",
+        "summary": "Completa la orden",
         "operationId": "CompletedOrder",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "Con este endpoint se completa la orden del usuario ",
           "content": {
             "application/json": {
               "schema": {
@@ -436,14 +480,19 @@
     },
     "/productInOrder/orders": {
       "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": [
           "Orders"
         ],
-        "summary": "Add products in order",
+        "summary": "Agrega productos a la orden",
         "operationId": "Addproductsinorder",
         "parameters": [],
         "requestBody": {
-          "description": "",
+          "description": "con este endpoint se ban agregando los productos que selecciono el usuario a la orden",
           "content": {
             "application/json": {
               "schema": {
@@ -632,6 +681,13 @@
           "price": 40,
           "quantity": 1
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   },
