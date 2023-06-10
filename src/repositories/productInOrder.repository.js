@@ -36,7 +36,7 @@ const updateQantityInOrder = async (productId, orderId) => {
 }
 
 const getOrderDetailsByOrderId = async (orderId) =>{
-  const order = await ProductInOrder.findOne({
+  const order = await ProductInOrder.findAll({
     where:{orderId},
     include:[
       {

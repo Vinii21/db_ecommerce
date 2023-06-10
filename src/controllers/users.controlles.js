@@ -68,12 +68,23 @@ const getUserbyIdController = async (req, res, next) =>{
   }
 }
 
+const getOrdersByUserId = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const user = await UserServices.getOrders(id)
+    res.status(200).json(user)
+  } catch (e) {
+    next(e)
+  }
+}
+
 module.exports = {
   createUser,
   login,
   validateEmail,
   updateUserController,
-  getUserbyIdController
+  getUserbyIdController,
+  getOrdersByUserId
 };
 
 // alguien esta editando
