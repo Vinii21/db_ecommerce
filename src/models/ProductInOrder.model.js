@@ -21,10 +21,6 @@ const ProductInOrder = db.define(
     price: {
       type: DataTypes.REAL,
       allowNull: false
-    },
-    status:{
-      type: DataTypes.BOOLEAN,
-      defaultValue:false
     }
   }, {
   timestamps: false
