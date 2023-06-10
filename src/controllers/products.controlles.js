@@ -23,7 +23,17 @@ const updateDescriptionController = async (req, res, next) => {
   }
 };
 
+const getProductUserMayorController = async (req, res, next) => {
+  try {
+    const product = await ProductService.getProductUserServices();
+    res.json(product);
+  } catch (error) {
+    next(error)
+  }
+};
+
 module.exports = {
   createProductController,
-  updateDescriptionController
+  updateDescriptionController,
+  getProductUserMayorController
 }
