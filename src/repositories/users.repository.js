@@ -2,6 +2,7 @@ const Users = require("../models/users.model");
 const Cars = require("../models/cars.model");
 const ProductsInCar = require("../models/productInCar.model")
 const Products = require("../models/products.model")
+const Orders = require("../models/orders.model")
 
 const createUser = async (newUser) => {
     const user = await Users.create(newUser);
@@ -61,10 +62,23 @@ const getUserbyIdAndProductsInCar = async (id) => {
     return user;
 }
 
+const getOrdersByUserId = async (id) => {
+    const user = await Users.findByPk(id,{
+        attributes: {exclude: ["password", "validUser", "firstname", "lastname", "id","avatar"]},
+        include: [
+            {
+                model: Orders
+            }
+        ]
+    })
+    return user;
+}
+
 module.exports = {
     createUser,
     loginUser,
     validateEmail,
     updateUser,
-    getUserbyIdAndProductsInCar
+    getUserbyIdAndProductsInCar,
+    getOrdersByUserId
 }
