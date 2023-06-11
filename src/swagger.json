@@ -67,7 +67,7 @@
         "tags": [
           "USER"
         ],
-        "summary": "obtiene los porudctos de un usuario por su id",
+        "summary": "Obtener los productos actuales del carrito por el id del usuario",
         "operationId": "Getproductsincarbyuserid",
         "parameters": [
           {
