@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "API_ECOMMERCE",
-    "description":"Una API para manejar todo lo relacionado a un e-commerce con sus funcionalidades basicas como crear usuarios, login, crear productos entre otras funcionalidades",
+    "description": "Una API para manejar todo lo relacionado a un e-commerce con sus funcionalidades basicas como crear usuarios, login, crear productos entre otras funcionalidades",
     "contact": {},
     "version": "1.0"
   },
@@ -82,8 +82,8 @@
             }
           }
         ],
-        "requestBody":{
-          "description":"Endpoint para obtener los productos de un usuario utilizando el id de ese usuario trae una lista de todos sus productos"
+        "requestBody": {
+          "description": "Endpoint para obtener los productos de un usuario utilizando el id de ese usuario trae una lista de todos sus productos"
         },
         "responses": {
           "200": {
@@ -294,7 +294,7 @@
           {
             "name": "access-token",
             "in": "header",
-            "description": "edita la descripción de un producto utilizando el id del producto que se quiere editar",
+            "description": "",
             "required": true,
             "style": "simple",
             "schema": {
@@ -302,6 +302,29 @@
             }
           }
         ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/EditdescriptionproductRequest"
+                  },
+                  {
+                    "example": {
+                      "description": "descripcion del producto"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "description": "descripcion del producto"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "",
@@ -431,7 +454,7 @@
         "deprecated": false
       }
     },
-    "/orders/3": {
+    "/orders/1": {
       "put": {
         "security": [
           {
@@ -646,6 +669,21 @@
         "example": {
           "carId": 1,
           "email": "vichavarria21@gmail.com"
+        }
+      },
+      "EditdescriptionproductRequest": {
+        "title": "EditdescriptionproductRequest",
+        "required": [
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "description": "descripcion del producto"
         }
       },
       "AddproductsinorderRequest": {

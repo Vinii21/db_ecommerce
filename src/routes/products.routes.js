@@ -11,7 +11,7 @@ const router = Router();
 router.post("/products", authenticate, upload, createProductController);
 router.put("/products", authenticate, updateDescriptionController);
 router.post("/products", upload, createProductController);
-router.put("/products", updateDescriptionValidator, updateDescriptionController);
+router.put("/products/:id", updateDescriptionValidator, updateDescriptionController);
 router.get("/products", getProductUserMayorController);
 
 module.exports = router;
